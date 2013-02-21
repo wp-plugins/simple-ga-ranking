@@ -3,7 +3,7 @@ Contributors: horike,megumithemes
 Tags:  form, ranking, popular, google analytics
 Requires at least: 3.5.1
 Tested up to: 3.5.1
-Stable tag: 1.0
+Stable tag: 1.1
 
 Ranking plugin using data from google analytics.
 
@@ -41,3 +41,5 @@ Please contact to me.
 == Changelog ==
 = 1.0 =
 * first release. 
+= 1.1 =
+Apply widget.

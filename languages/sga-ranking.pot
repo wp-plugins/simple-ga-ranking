@@ -40,3 +40,5 @@ msgstr ""
 msgid "day"
 msgstr ""
 
+msgid "Show ranking the data from Google Analytics"
+msgstr ""
