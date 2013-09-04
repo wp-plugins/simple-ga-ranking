@@ -1,9 +1,9 @@
 === Simple GA Ranking  ===
 Contributors: horike,megumithemes
 Tags:  form, ranking, popular, google analytics
-Requires at least: 3.5.1
-Tested up to: 3.5.1
-Stable tag: 1.2.1
+Requires at least: 3.6
+Tested up to: 3.6
+Stable tag: 1.2.2
 
 Ranking plugin using data from google analytics.
 
@@ -42,4 +42,7 @@ Please contact to me.
 = 1.0 =
 * first release. 
 = 1.1 =
-Apply widget.
+* Apply widget.
+= 1.2.2 =
+* Metric change visitors to pageviews.
+* fixed a bug that custom post type.
