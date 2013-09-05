@@ -4,7 +4,7 @@ Plugin Name: Simple GA Ranking
 Author: Horike Takahiro
 Plugin URI: http://www.kakunin-pl.us
 Description: Ranking plugin using data from google analytics.
-Version: 1.2.2
+Version: 1.2.3
 Author URI: http://www.kakunin-pl.us
 Domain Path: /languages
 Text Domain: 
@@ -83,6 +83,8 @@ function sga_ranking_get_date( $args = array() ) {
 					$transient_key .= '_' . $k . '_' . $r[$k];
 			}
 		}
+		$filter_val = isset($r['filter']) ? $r['filter'] : '' ;
+		$transient_key .= '_' . $filter_val;
 		$transient_key = md5($transient_key);
 		$transient_key = substr( $transient_key, 0, 30 );
 
@@ -94,7 +96,7 @@ function sga_ranking_get_date( $args = array() ) {
 					$options['profile_id'],
 					array('hostname', 'pagePath'),
 					array('pageviews'), array('-pageviews'),
-					$filter='',
+					$filter="{$filter_val}",
 					$start_date=$options['start_date'],
 					$end_date=$options['end_date'] 
 			);
@@ -102,14 +104,16 @@ function sga_ranking_get_date( $args = array() ) {
 			$cnt = 0;
 			$post_ids = array();
 			foreach($ga->getResults() as $result) {
+
 				$max = (int)$options['display_count'];
 				if ( $cnt >= $max )
 					break;
 					
 				if ( strpos($result->getPagepath(), 'preview=true') !== false )
 					continue;
-
+	
 				$post_id = sga_url_to_postid(esc_url($result->getPagepath()));
+
 				if ( $post_id == 0 )
 					continue;
 
