@@ -4,7 +4,7 @@ Plugin Name: Simple GA Ranking
 Author: Horike Takahiro
 Plugin URI: http://www.kakunin-pl.us
 Description: Ranking plugin using data from google analytics.
-Version: 1.2.5
+Version: 1.2.6
 Author URI: http://www.kakunin-pl.us
 Domain Path: /languages
 Text Domain: 
@@ -42,7 +42,8 @@ require_once( SGA_RANKING_PLUGIN_DIR . '/lib/gapi.class.php' );
 
 function sga_ranking_get_date( $args = array() ) {
 
-	if ( defined( 'SGA_RANKING_TEST_MODE' ) && SGA_RANKING_TEST_MODE === true  ) {
+	$options = get_option( 'sga_ranking_options' );
+	if ( defined( 'SGA_RANKING_TEST_MODE' ) && SGA_RANKING_TEST_MODE === true || isset($options['debug_mode']) && $options['debug_mode'] == 1 ) {
 		global $wpdb;
 		$r = wp_parse_args( $args );
 		if ( !isset($r['display_count']) )
@@ -57,7 +58,6 @@ function sga_ranking_get_date( $args = array() ) {
 		return $ids;
 	}
 
-	$options = get_option( 'sga_ranking_options' );
 	try {
 
 		$r = wp_parse_args( $args );

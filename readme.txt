@@ -1,9 +1,9 @@
 === Simple GA Ranking  ===
 Contributors: horike,megumithemes
 Tags:  form, ranking, popular, google analytics
-Requires at least: 3.6
-Tested up to: 3.6
-Stable tag: 1.2.5
+Requires at least: 3.6.1
+Tested up to: 3.6.1
+Stable tag: 1.2.6
 
 Ranking plugin using data from google analytics.
 
@@ -52,3 +52,5 @@ Please contact to me.
 * Add test mode.`define('SGA_RANKING_TEST_MODE', true);` on wp-config.php.
 = 1.2.5 =
 * fixed a bug that ver 1.2.4
+= 1.2.6 =
+* test mode can set on option page.
