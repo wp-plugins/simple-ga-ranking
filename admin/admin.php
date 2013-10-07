@@ -57,6 +57,9 @@ function sga_ranking_admin_init() {
 
 	add_settings_field( 'sga_ranking_display_count', __( 'Display Count', SGA_RANKING_DOMAIN ), 'sga_ranking_setting_display_count',
 		'sga_ranking', 'sga_ranking_main' );
+		
+	add_settings_field( 'sga_ranking_debug_mode', __( 'Debug Mode', SGA_RANKING_DOMAIN ), 'sga_ranking_setting_debug_mode',
+		'sga_ranking', 'sga_ranking_main' );
 
 }
 
@@ -117,6 +120,12 @@ function sga_ranking_setting_display_count() {
 	echo '<input id="sga_ranking_display_count" name="sga_ranking_options[display_count]" size="4" type="text" value="' . esc_attr( $options['display_count'] ) . '" />';
 }
 
+function sga_ranking_setting_debug_mode() {
+	$options = get_option( 'sga_ranking_options' );
+	
+	echo '<input id="sga_ranking_debug_mode" name="sga_ranking_options[debug_mode]" size="4" type="checkbox" value="1" ' . checked( $options['debug_mode'], 1 , false ) . '" />';
+}
+
 function sga_ranking_options_validate( $input ) {
 	$newinput['email'] = trim( $input['email'] );
 	$newinput['pass'] = trim( $input['pass'] );
@@ -127,6 +136,7 @@ function sga_ranking_options_validate( $input ) {
 	$newinput['pagePath'] = trim( $input['pagePath'] );
 	$newinput['period'] = absint( $input['period'] );
 	$newinput['display_count'] = absint( $input['display_count'] );
+	$newinput['debug_mode'] = absint( $input['debug_mode'] );
 
 	return $newinput;
 }
