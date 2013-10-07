@@ -3,7 +3,7 @@ Contributors: horike,megumithemes
 Tags:  form, ranking, popular, google analytics
 Requires at least: 3.6.1
 Tested up to: 3.6.1
-Stable tag: 1.2.7
+Stable tag: 1.2.8
 
 Ranking plugin using data from google analytics.
 
@@ -20,15 +20,15 @@ Ranking plugin using data from google analytics.
 
 4. The short code supports parameters as follows: `post_type`, `exclude_post_type`, `'taxonomy_slug'__in`, `'taxonomy_slug'__not_in`, filter. All parameters except “filter” need to be set the slug(s).
 
-`post_type`: set the attribute of the slug of the post-type you’d like to show. You can set multiple sulgs separeted by comma.
+`post_type` -  set the attribute of the slug of the post-type you’d like to show. You can set multiple sulgs separeted by comma.
 
-`exclude_post_type`: set the attribute of the post-type you’d NOT like to show. You can set multiple sulgs separeted by comma.
+`exclude_post_type` - set the attribute of the post-type you’d NOT like to show. You can set multiple sulgs separeted by comma.
 
-`'taxonomy_slug'__in`: set the attribute of the taxonomy you’d like to show. You can set multiple terms separeted by comma.
+`'taxonomy_slug'__in` - set the attribute of the taxonomy you’d like to show. You can set multiple terms separeted by comma.
 
-`'taxonomy_slug'__not_in`: set the attribute of the taxonomy you’d NOT like to show. You can set multiple terms separeted by comma.
+`'taxonomy_slug'__not_in` - set the attribute of the taxonomy you’d NOT like to show. You can set multiple terms separeted by comma.
 
-filter: You can use the filter parameter as same as the fileter parameter of Google Analytics API.
+`filter` -  You can use the filter parameter as same as the fileter parameter of Google Analytics API.
 [https://developers.google.com/analytics/devguides/reporting/core/v3/reference](https://developers.google.com/analytics/devguides/reporting/core/v3/reference)
 
 For example, suppose you have a multi-languages site with direcotry based multisite, and take the statistic of all sites of the multisite having with the URL structure as follows by one GA account.
@@ -82,5 +82,5 @@ Please contact to me.
 * fixed a bug that ver 1.2.4
 = 1.2.6 =
 * test mode can set on option page.
-= 1.2.7 =
+= 1.2.8 =
 * Change readme.txt.
