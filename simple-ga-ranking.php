@@ -131,6 +131,10 @@ function sga_ranking_get_date( $args = array() ) {
 
 				if ( $post_id == 0 )
 					continue;
+					
+				$post_obj = get_post($post_id);
+				if ( !is_object($post_obj) || $post_obj->post_status != 'publish' )
+					continue;
 
 				if ( !empty($r) ) {
 					if ( array_key_exists( 'post_type', $r ) ) {
@@ -207,33 +211,21 @@ add_filter( 'widget_text', 'do_shortcode' );
 add_shortcode('sga_ranking', 'sga_ranking_shortcode');
 function sga_ranking_shortcode( $atts ) {
 
-	$options = get_option( 'sga_ranking_options' );
 	$ids = sga_ranking_get_date($atts);
 
 	if ( empty( $ids ) )
 		return;
 
-	$key = 'sga_ranking_' . $options['period'] . '_' . $options['display_count'] . '_html';
-	$key = md5($key);
-	$key = substr( $key, 0, 30 );
-	if ($html = get_transient($key)) {
-		return $html;
-	} else {
-		$cnt = 1;
-		$output = '<ol class="sga-ranking">';
-		foreach( $ids as $id ) {
-			$output .= '<li class="sga-ranking-list sga-ranking-list-'.$cnt.'">' . apply_filters( 'sga_ranking_before_title', '', $id, $cnt ) . '<a href="'.get_permalink($id).'" title="'.get_the_title($id).'">'.get_the_title($id).'</a>' . apply_filters( 'sga_ranking_after_title', '', $id, $cnt ) . '</li>';
-			$cnt++;
-		}
-		$output .= '</ol>';
-		delete_transient($key);
-		set_transient(
-			$key,
-			$output,
-			intval(apply_filters('sga_ranking_html_cache_expire', 24*60*60))
-		);
-		return $output;
-	}
+	$cnt = 1;
+    $output = '<ol class="sga-ranking">';
+    foreach( $ids as $id ) {
+    	$output .= '<li class="sga-ranking-list sga-ranking-list-'.$cnt.'">' . apply_filters( 'sga_ranking_before_title', '', $id, $cnt ) . '<a href="'.get_permalink($id).'" title="'.get_the_title($id).'">'.get_the_title($id).'</a>' . apply_filters( 'sga_ranking_after_title', '', $id, $cnt ) . '</li>';
+    	$cnt++;
+    }
+    $output .= '</ol>';
+
+    return $output;
+
 }
 
 
