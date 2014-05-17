@@ -2,8 +2,8 @@
 Contributors: horike,megumithemes
 Tags:  form, ranking, popular, google analytics
 Requires at least: 3.6.1
-Tested up to: 3.6.1
-Stable tag: 1.2.12
+Tested up to: 3.8.3
+Stable tag: 1.2.14
 
 Ranking plugin using data from google analytics.
 
@@ -48,6 +48,7 @@ Please try ohter parameters using the below sites as a reference.
 = Translators =
 * English(en) - [megumithemes](http://profiles.wordpress.org/megumithemes/)
 * Japanese(ja) - [Horike Takahiro](http://profiles.wordpress.org/horike)
+* Thai(th_TH) - [TG Knowledge](http://www.xn--12cg1cxchd0a2gzc1c5d5a.com)
 
 You can send your own language pack to me.
 
@@ -85,4 +86,6 @@ Please contact to me.
 = 1.2.9 =
 * Update readme.txt.
 = 1.2.12 =
-- add filter `sga_widget_shortcode_argument`.
+* add filter `sga_widget_shortcode_argument`.
+= 1.2.14 =
+* Thai support
