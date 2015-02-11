@@ -2,12 +2,12 @@
 /*
 Plugin Name: Simple GA Ranking
 Author: Horike Takahiro
-Plugin URI: http://www.kakunin-pl.us
+Plugin URI: https://github.com/horike37/simple-ga-ranking
 Description: Ranking plugin using data from google analytics.
-Version: 1.2.16
-Author URI: http://www.kakunin-pl.us
+Version: 1.3
+Author URI: https://github.com/horike37/simple-ga-ranking
 Domain Path: /languages
-Text Domain: 
+Text Domain:
 
 Copyright 2013 horike takahiro (email : horike37@gmail.com)
 
@@ -28,7 +28,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 if ( ! defined( 'SGA_RANKING_DOMAIN' ) )
 	define( 'SGA_RANKING_DOMAIN', 'sga-ranking' );
-	
+
 if ( ! defined( 'SGA_RANKING_PLUGIN_URL' ) )
 	define( 'SGA_RANKING_PLUGIN_URL', plugins_url() . '/' . dirname( plugin_basename( __FILE__ ) ));
 
@@ -38,7 +38,9 @@ if ( ! defined( 'SGA_RANKING_PLUGIN_DIR' ) )
 load_plugin_textdomain( SGA_RANKING_DOMAIN, false, dirname(plugin_basename(__FILE__)) . '/languages' );
 
 require_once( SGA_RANKING_PLUGIN_DIR . '/admin/admin.php' );
-require_once( SGA_RANKING_PLUGIN_DIR . '/lib/gapi.class.php' );
+if ( !class_exists( 'gapi' ) ) {
+	require_once( SGA_RANKING_PLUGIN_DIR . '/lib/gapi.class.php' );
+}
 
 function sga_ranking_get_date( $args = array() ) {
 
@@ -54,7 +56,7 @@ function sga_ranking_get_date( $args = array() ) {
 		foreach ( $rets as $ret ) {
 			$ids[] = $ret->ID;
 		}
-		
+
 		return $ids;
 	}
 
@@ -107,7 +109,7 @@ function sga_ranking_get_date( $args = array() ) {
 			return $id;
 		} else {
 			$ga = new gapi( $options['email'], $options['pass'] );
-			$ga->requestReportData( 
+			$ga->requestReportData(
 					$options['profile_id'],
 					array('hostname', 'pagePath'),
 					array('pageviews'), array('-pageviews'),
@@ -125,21 +127,21 @@ function sga_ranking_get_date( $args = array() ) {
 				$max = (int)$options['display_count'];
 				if ( $cnt >= $max )
 					break;
-					
+
 				if ( strpos($result->getPagepath(), 'preview=true') !== false )
 					continue;
 
 				$post_id = sga_url_to_postid(esc_url($result->getPagepath()));
-				
+
 				if ( $post_id == 0 )
 					$post_id = url_to_postid(esc_url($result->getPagepath()));
 
 				if ( $post_id == 0 )
 					continue;
-					
+
 				if ( in_array( $post_id, $post_ids ) )
 					continue;
-					
+
 				$post_obj = get_post($post_id);
 				if ( !is_object($post_obj) || $post_obj->post_status != 'publish' )
 					continue;
@@ -209,9 +211,9 @@ function sga_ranking_get_date( $args = array() ) {
  				return $post_ids;
 			}
 		}
-	} catch (Exception $e) { 
+	} catch (Exception $e) {
 		if ( is_user_logged_in() )
-			print 'Simple GA Ranking Error: ' . $e->getMessage(); 
+			print 'Simple GA Ranking Error: ' . $e->getMessage();
 	}
 }
 
@@ -397,4 +399,17 @@ function sga_url_to_postid($url)
 		}
 	}
 	return 0;
+}
+
+require_once( ABSPATH . 'wp-admin/includes/plugin.php' );
+if ( is_plugin_active( 'json-rest-api/plugin.php' ) && ( '3.9.2' <= get_bloginfo( 'version' ) && '4.2' > get_bloginfo( 'version' ) ) ) {
+
+	require_once( SGA_RANKING_PLUGIN_DIR . '/lib/wp-rest-api.class.php' );
+
+	function sga_json_api_ranking_filters( $server ) {
+		// Ranking
+		$wp_json_ranking = new WP_JSON_SGRanking( $server );
+		add_filter( 'json_endpoints', array( $wp_json_ranking, 'register_routes'    ), 1     );
+	}
+	add_action( 'wp_json_server_before_serve', 'sga_json_api_ranking_filters', 10, 1 );
 }
