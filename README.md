@@ -1,4 +1,4 @@
-=== Simple GA Ranking  ===
+# Simple GA Ranking 
 Contributors: horike,megumithemes
 Tags:  form, ranking, popular, google analytics
 Requires at least: 3.6.1
@@ -7,7 +7,7 @@ Stable tag: 1.3
 
 Ranking plugin using data from google analytics.
 
-== Description ==
+# Description
 
 Ranking plugin using data from google analytics.
 
@@ -49,7 +49,7 @@ You can use JSON REST API Endpoint. Require plugin [JSON REST API](https://wordp
 `http://example.com/wp-json/ranking`
 
 
-= Translators =
+# Translators
 * English(en) - [megumithemes](http://profiles.wordpress.org/megumithemes/)
 * Japanese(ja) - [Horike Takahiro](http://profiles.wordpress.org/horike)
 * Thai(th_TH) - [TG Knowledge](http://www.xn--12cg1cxchd0a2gzc1c5d5a.com)
@@ -61,17 +61,16 @@ Please contact to me.
 * @[horike37](http://twitter.com/horike37) on twitter
 * [Horike Takahiro](https://www.facebook.com/horike.takahiro) on facebook
 
-= Contributors =
+# Contributors
 * [Horike Takahiro](http://profiles.wordpress.org/horike)
+* [webnist](https://profiles.wordpress.org/webnist)
 
-== Installation ==
+# Installation
 
 1. Upload `simple-ga-ranking` to the `/wp-content/plugins/` directory.
 2. Activate the plugin through the 'Plugins' menu in WordPress.
 
-== Screenshots ==
-
-== Changelog ==
+# Changelog
 = 1.0 =
 * first release. 
 = 1.1 =
